@@ -3,6 +3,9 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 /Library/
+ZombieBlastVR/Library/
+/library/
+/Library
 /[Tt]emp/
 /Obj/
 /Build/
