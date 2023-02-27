@@ -3,7 +3,7 @@
 In this project with Virtual Reality, I created a zombie shooter game that simulates users' physical presence in a computer-generated environment. VR gaming systems aim to let users believe they inhabit a virtual world. VR gaming systems simulate a virtual world where players can interact with virtual items and features.
 
 
-<img src="zombie.png" width="200" height=300></img> 
+<img src="zom.png" width="400" height=300></img> 
 
 
 ## Language
