@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -11,7 +13,10 @@ public class MainMenu : MonoBehaviour
     public GameObject savedgameprefabs;
     void Update()
     {
-        
+        if (XRSettings.loadedDeviceName.Equals("cardboard"))
+        {
+            SceneManager.LoadSceneAsync(1);
+        }
     }
 
     public void NewGame()
@@ -30,12 +35,16 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuButtons[0].SetActive(false);
         mainMenuButtons[1].SetActive(false);
+        mainMenuButtons[2].SetActive(true);
 
     }
-    void ActiveMainMenuButtons()
+    public void ActiveMainMenuButtons()
     {
+        mainMenus[0].SetActive(false);
+        mainMenus[1].SetActive(false);
         mainMenuButtons[0].SetActive(true);
         mainMenuButtons[1].SetActive(true);
+        mainMenuButtons[2].SetActive(false);
         
 
     }
@@ -67,6 +76,7 @@ public class MainMenu : MonoBehaviour
     {
         SavedData.control.username = sgp;
         SavedData.control.LoadGame();
+        StartCoroutine(VRLoader());
     }
 
 
@@ -82,5 +92,18 @@ public class MainMenu : MonoBehaviour
             allnames = allnames + "," + SavedData.control.username;
             PlayerPrefs.SetString("ZombieBlastSavedGames", allnames);
         }
+        StartCoroutine(VRLoader());
+    }
+    IEnumerator VRLoader()
+    {
+        XRSettings.LoadDeviceByName("cardboard");
+        StartCoroutine(waitingForFrame());
+        yield return 0;
+    }
+
+    IEnumerator waitingForFrame()
+    {
+        yield return 0;
+        XRSettings.enabled = true;
     }
 }
