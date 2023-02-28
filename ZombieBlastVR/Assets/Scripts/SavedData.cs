@@ -44,11 +44,12 @@ public class SavedData : MonoBehaviour
         if (File.Exists(Application.persistentDataPath+"/"+ username + ".dat"))
         {
             file = File.Open(Application.persistentDataPath + "/" + username + ".dat", FileMode.Open);
-
+            Debug.Log("exist");
         }
         else
         {
             file = File.Create(Application.persistentDataPath + "/" + username + ".dat");
+            Debug.Log("create");
 
         }
         SaveDataHolder sdh = new SaveDataHolder(username, score, levels);
@@ -56,7 +57,7 @@ public class SavedData : MonoBehaviour
         file.Close();
     }
 
-    public void LoadGame()
+    public bool LoadGame()
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file;
@@ -68,10 +69,12 @@ public class SavedData : MonoBehaviour
             score = sdh.GetScore();
             levels = sdh.GetLevels();
             file.Close();
+            return true;
         }
         else
         {
             Debug.Log("file not found");
+            return false;
         }
 
     }
